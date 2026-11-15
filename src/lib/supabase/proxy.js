@@ -39,9 +39,13 @@ export async function updateSession(request) {
     }
   );
 
-  const {
-    data: { claims },
-  } = await supabase.auth.getClaims();
+ const { data, error } = await supabase.auth.getClaims();
+
+if (error) {
+  console.error("SUPABASE CLAIMS ERROR:", error.message);
+}
+
+const claims = data?.claims;
 
   const pathname = request.nextUrl.pathname;
 
