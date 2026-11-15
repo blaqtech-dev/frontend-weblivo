@@ -1,0 +1,63 @@
+
+.generation-action {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.generation-button {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 9px;
+  background: #5855dc;
+  color: white;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.generation-button:hover:not(:disabled) {
+  background: #4642c5;
+}
+
+.generation-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.generation-spinner {
+  animation: generation-spin 1s linear infinite;
+}
+
+@keyframes generation-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.generation-status,
+.generation-error,
+.generation-success {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.generation-status {
+  color: #777;
+}
+
+.generation-error {
+  color: #dc2626;
+}
+
+.generation-success {
+  color: #15803d;
+}

@@ -1,0 +1,240 @@
+
+.template-section {
+  padding: 110px 24px;
+  background: #f8f8fc;
+}
+
+.template-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.template-heading {
+  max-width: 690px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.template-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #635bff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.template-heading h2 {
+  margin: 0;
+  color: #17182b;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.7px;
+}
+
+.template-heading h2 span {
+  display: block;
+  color: #635bff;
+}
+
+.template-heading p {
+  max-width: 570px;
+  margin: 20px auto 0;
+  color: #77798c;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 27px;
+}
+
+.template-card {
+  overflow: hidden;
+  border: 1px solid #e9e9f1;
+  border-radius: 18px;
+  background: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 45px rgba(30, 30, 70, 0.09);
+}
+
+.template-image {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  background: #e9e8f4;
+}
+
+.template-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.template-card:hover .template-image img {
+  transform: scale(1.05);
+}
+
+.template-tag {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #45415f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.template-image-overlay {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  background: rgba(20, 20, 35, 0.55);
+  color: #ffffff;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.3s ease;
+}
+
+.template-card:hover .template-image-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.template-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 23px;
+}
+
+.template-category {
+  color: #635bff;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.template-info h3 {
+  margin: 8px 0;
+  color: #191a2c;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.template-info p {
+  margin: 0;
+  color: #77798c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.template-arrow {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f0efff;
+  color: #635bff;
+  transition: 0.2s ease;
+}
+
+.template-card:hover .template-arrow {
+  background: #635bff;
+  color: #ffffff;
+}
+
+.template-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 45px;
+  padding: 30px;
+  border: 1px solid #e8e6ff;
+  border-radius: 17px;
+  background: #ffffff;
+}
+
+.template-bottom h3 {
+  margin: 0 0 8px;
+  color: #191a2c;
+  font-size: 19px;
+}
+
+.template-bottom p {
+  margin: 0;
+  color: #77798c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.template-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-radius: 9px;
+  background: #635bff;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.template-button:hover {
+  background: #5047e8;
+}
+
+@media (max-width: 700px) {
+  .template-section {
+    padding: 75px 18px;
+  }
+
+  .template-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .template-image {
+    height: 230px;
+  }
+
+  .template-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 22px;
+  }
+
+  .template-button {
+    width: 100%;
+  }
+}

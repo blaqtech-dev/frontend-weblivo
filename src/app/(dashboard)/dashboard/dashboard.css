@@ -1,0 +1,248 @@
+
+.overview-page {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.overview-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.overview-eyebrow {
+  color: #6257e8;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.3px;
+  margin-bottom: 12px;
+}
+
+.overview-welcome h1 {
+  font-size: clamp(23px, 3vw, 31px);
+  letter-spacing: -1.1px;
+  font-weight: 750;
+  color: #1c1d29;
+  margin-bottom: 9px;
+}
+
+.overview-welcome > div > p:last-child {
+  color: #858897;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.overview-create-button,
+.overview-empty-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: #6257e8;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 17px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.overview-create-button:hover,
+.overview-empty-button:hover {
+  background: #5045d3;
+  transform: translateY(-1px);
+}
+
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.overview-stat-card {
+  background: #fff;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.overview-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #818595;
+  font-size: 12px;
+}
+
+.overview-stat-top svg {
+  color: #6257e8;
+}
+
+.overview-stat-card h2 {
+  font-size: 29px;
+  font-weight: 750;
+  color: #20212c;
+  margin: 20px 0 5px;
+}
+
+.overview-stat-card > p {
+  color: #999ca8;
+  font-size: 11px;
+}
+
+.overview-main-section {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.overview-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.overview-section-heading h2 {
+  color: #20212c;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.overview-section-heading p {
+  color: #9295a1;
+  font-size: 11px;
+}
+
+.overview-view-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #6257e8;
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.overview-empty-state {
+  background: #fff;
+  border: 1px dashed #d9d8e8;
+  border-radius: 13px;
+  min-height: 285px;
+  padding: 35px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overview-empty-icon,
+.overview-info-icon {
+  width: 53px;
+  height: 53px;
+  border-radius: 14px;
+  background: #f0efff;
+  color: #6257e8;
+  display: grid;
+  place-items: center;
+}
+
+.overview-empty-state h3 {
+  font-size: 16px;
+  color: #272835;
+  font-weight: 700;
+  margin: 17px 0 8px;
+}
+
+.overview-empty-state > p {
+  max-width: 390px;
+  color: #9093a0;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 19px;
+}
+
+.overview-empty-button {
+  padding: 11px 15px;
+}
+
+.overview-bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.overview-info-card {
+  background: #fff;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.overview-info-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+}
+
+.overview-info-card h3 {
+  font-size: 13px;
+  color: #292a36;
+  margin: 17px 0 8px;
+}
+
+.overview-info-card p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #9295a1;
+  min-height: 40px;
+}
+
+.overview-info-card > span {
+  display: inline-block;
+  margin-top: 17px;
+  color: #6257e8;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+@media (max-width: 850px) {
+  .overview-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .overview-page {
+    gap: 25px;
+  }
+
+  .overview-welcome {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .overview-create-button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .overview-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .overview-stat-card {
+    padding: 18px;
+  }
+
+  .overview-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

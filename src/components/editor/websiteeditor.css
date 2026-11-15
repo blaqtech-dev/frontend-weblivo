@@ -1,0 +1,130 @@
+
+.website-editor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Editor toolbar */
+
+.website-editor-toolbar {
+  width: 100%;
+  padding: 22px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035);
+}
+
+.website-editor-toolbar strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #172033;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.3px;
+}
+
+.website-editor-toolbar p {
+  margin: 0;
+  color: #8791a2;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Save button */
+
+.website-editor-save {
+  min-height: 43px;
+  padding: 0 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 9px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.website-editor-save:hover:not(:disabled) {
+  background: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.2);
+}
+
+.website-editor-save:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.website-editor-save:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.25);
+  outline-offset: 3px;
+}
+
+/* Saving spinner */
+
+.website-editor-spinner {
+  animation: website-editor-spin 0.9s linear infinite;
+}
+
+@keyframes website-editor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Save feedback */
+
+.website-editor-message {
+  width: fit-content;
+  max-width: 100%;
+  margin: -8px 0 0;
+  padding: 11px 15px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Website preview spacing */
+
+.website-editor > .website-preview {
+  width: 100%;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .website-editor {
+    gap: 16px;
+  }
+
+  .website-editor-toolbar {
+    padding: 18px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .website-editor-save {
+    width: 100%;
+  }
+
+  .website-editor-message {
+    width: 100%;
+  }
+}

@@ -1,0 +1,247 @@
+
+.features-section {
+  padding: 110px 24px;
+  background: #ffffff;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-heading {
+  max-width: 700px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.features-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  background: #f2f1ff;
+  border: 1px solid #e8e6ff;
+  border-radius: 50px;
+  color: #635bff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.features-heading h2 {
+  margin: 23px 0 17px;
+  color: #17182b;
+  font-size: clamp(35px, 4.5vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.features-heading h2 span {
+  display: block;
+  color: #635bff;
+}
+
+.features-heading > p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #777b8d;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  padding: 29px 25px;
+  min-height: 235px;
+  background: #ffffff;
+  border: 1px solid #ebebf2;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: #c8c4ff;
+  box-shadow: 0 18px 45px rgba(48, 43, 120, 0.07);
+}
+
+.feature-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f1f0ff;
+  color: #635bff;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  background: #635bff;
+  color: white;
+  transform: scale(1.06);
+}
+
+.feature-number {
+  color: #d0d0dc;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.feature-card h3 {
+  margin: 0 0 11px;
+  color: #24263a;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.feature-card p {
+  margin: 0;
+  color: #85889a;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.feature-card-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #635bff;
+  transition: width 0.3s ease;
+}
+
+.feature-card:hover .feature-card-line {
+  width: 100%;
+}
+
+.features-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 55px;
+  padding: 27px 30px;
+  background: #f8f8ff;
+  border: 1px solid #eeedff;
+  border-radius: 14px;
+}
+
+.features-bottom-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.features-bottom-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eae8ff;
+  color: #635bff;
+}
+
+.features-bottom-content h3 {
+  margin: 0 0 5px;
+  color: #24263a;
+  font-size: 15px;
+}
+
+.features-bottom-content p {
+  margin: 0;
+  color: #85889a;
+  font-size: 12px;
+}
+
+.features-bottom-button {
+  flex-shrink: 0;
+  padding: 12px 19px;
+  border-radius: 8px;
+  background: #635bff;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.features-bottom-button:hover {
+  background: #5148e5;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-section {
+    padding: 85px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .features-section {
+    padding: 75px 18px;
+  }
+
+  .features-heading {
+    margin-bottom: 40px;
+  }
+
+  .features-heading h2 {
+    font-size: 35px;
+    letter-spacing: -1.5px;
+  }
+
+  .features-heading > p {
+    font-size: 13px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .feature-card {
+    min-height: auto;
+    padding: 24px 21px;
+  }
+
+  .features-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 23px 20px;
+  }
+
+  .features-bottom-content h3 {
+    font-size: 14px;
+  }
+
+  .features-bottom-content p {
+    line-height: 1.6;
+  }
+}
