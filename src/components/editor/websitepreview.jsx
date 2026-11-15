@@ -352,6 +352,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
            <div className="preview-section-label">OUR STORY</div>
         <h2>
   <EditableText
+  editable={isEditable}
     value={section.heading}
     onSave={(value) => onTextChange?.(index, "heading", value)}
   />
