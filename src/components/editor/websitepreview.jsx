@@ -127,6 +127,7 @@ function getAccessibleBrandColor(foreground, background) {
 function EditableText({
   value,
   onSave,
+  editable = true,
   multiline = false,
   className = "",
   as = "span",
@@ -146,9 +147,9 @@ function EditableText({
     setEditing(false);
   };
 
-  if (!onSave) {
-    return <Tag className={className}>{value}</Tag>;
-  }
+ if (!editable || !onSave) {
+  return <Tag className={className}>{value}</Tag>;
+}
 
   if (editing) {
     return (
@@ -206,7 +207,7 @@ export default function WebsitePreview({
   contactDetails = {},
   onTextChange,
 }) {
-
+const isEditable = typeof onTextChange === "function";
       const [menuOpen, setMenuOpen] = useState(false);
 
   if (!websiteData || !Array.isArray(websiteData.sections)) {
@@ -294,6 +295,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
 <h1>
   <EditableText
     value={section.heading}
+    editable={isEditable}
     onSave={(value) => onTextChange?.(index, "heading", value)}
   />
 </h1>
@@ -301,6 +303,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
             <p>
   <EditableText
     multiline
+    editable={isEditable}
     value={section.subheading || section.content || description}
     onSave={(value) => {
       if (section.subheading) {
@@ -355,6 +358,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
 </h2>
        <p>
   <EditableText
+  editable={isEditable}
     multiline
     value={section.content || section.subheading || ""}
     onSave={(value) =>
@@ -380,6 +384,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
            <h2>
   <EditableText
     value={section.heading}
+    editable={isEditable}
     onSave={(value) => onTextChange?.(index, "heading", value)}
   />
 </h2>
@@ -397,6 +402,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
                  <h3>
   <EditableText
     value={typeof item === "string" ? item : item.title}
+    editable={isEditable}
     onSave={(value) =>
       onTextChange?.(
         index,
@@ -412,6 +418,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
   <p>
     <EditableText
       multiline
+      editable={isEditable}
       value={item.description}
       onSave={(value) =>
         onTextChange?.(index, "description", value, itemIndex)
@@ -437,6 +444,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
 <h2>
   <EditableText
     value={section.heading}
+    editable={isEditable}
     onSave={(value) => onTextChange?.(index, "heading", value)}
   />
 </h2>
@@ -559,6 +567,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
       <h2>
         <EditableText
           value={section.heading}
+          editable={isEditable}
           onSave={(value) => onTextChange?.(index, "heading", value)}
         />
       </h2>
@@ -665,6 +674,7 @@ style={{
     <img src={logoImage.url} alt={`${siteName} logo`} />
   ) : (
     <EditableText
+    editable={isEditable}
       value={siteName}
       onSave={(value) => onTextChange?.(null, "siteName", value)}
     />
