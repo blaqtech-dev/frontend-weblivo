@@ -299,6 +299,54 @@
   text-align: center;
 }
 
+.pricing-button-disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.pricing-button-disabled:hover {
+  transform: none;
+}
+
+
+.pricing-payment-error {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  padding: 14px 18px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.pricing-spinner {
+  animation: pricing-spin 1s linear infinite;
+}
+
+@keyframes pricing-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.dark-theme .pricing-payment-error {
+  background: #351f24;
+  border-color: #71343d;
+  color: #fca5a5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pricing-spinner {
+    animation-duration: 2s;
+  }
+}
+
 @media (max-width: 900px) {
   .pricing-grid {
     grid-template-columns: 1fr;

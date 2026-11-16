@@ -33,8 +33,21 @@ async function ProtectedDashboard({ children }) {
     redirect("/login");
   }
 
+  const userId = claims.sub;
+
+  const { data: workspaceSettings } = await supabase
+    .from("workspace_settings")
+    .select("appearance")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  const appearance = workspaceSettings?.appearance || "light";
+
   return (
-    <DashboardShell email={claims.email}>
+    <DashboardShell
+      email={claims.email}
+      appearance={appearance}
+    >
       {children}
     </DashboardShell>
   );

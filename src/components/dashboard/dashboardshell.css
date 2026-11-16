@@ -245,6 +245,114 @@
   display: none;
 }
 
+
+/* ========================================
+   WEBLIVO DARK THEME
+======================================== */
+
+.dashboard-layout.dark-theme {
+  background: #111318;
+  color: #f1f2f6;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.dark-theme .dashboard-sidebar {
+  background: #191b22;
+  border-right-color: #292c35;
+}
+
+.dark-theme .dashboard-logo {
+  color: #f1f2f6;
+}
+
+.dark-theme .sidebar-label {
+  color: #777d8c;
+}
+
+.dark-theme .sidebar-link {
+  color: #a1a5b3;
+}
+
+.dark-theme .sidebar-link:hover {
+  background: #252438;
+  color: #a59cff;
+}
+
+.dark-theme .sidebar-link.active {
+  background: #292640;
+  color: #a59cff;
+}
+
+.dark-theme .sidebar-user {
+  border-top-color: #292c35;
+}
+
+.dark-theme .sidebar-user-name {
+  color: #f1f2f6;
+}
+
+.dark-theme .sidebar-user-email {
+  color: #858b9a;
+}
+
+.dark-theme .sidebar-logout {
+  color: #858b9a;
+}
+
+.dark-theme .sidebar-logout:hover {
+  color: #ff7777;
+}
+
+.dark-theme .dashboard-topbar {
+  background: #191b22;
+  border-bottom-color: #292c35;
+}
+
+.dark-theme .topbar-breadcrumb {
+  color: #858b9a;
+}
+
+.dark-theme .topbar-breadcrumb strong {
+  color: #f1f2f6;
+}
+
+.dark-theme .topbar-credit {
+  background: #292640;
+  border-color: #393451;
+  color: #a59cff;
+}
+
+.dark-theme .topbar-credit strong {
+  color: #e1ddff;
+}
+
+.dark-theme .topbar-user {
+  color: #a1a5b3;
+}
+
+.dark-theme .sidebar-avatar,
+.dark-theme .topbar-avatar {
+  background: #302b50;
+  color: #b4aaff;
+}
+
+.dark-theme .dashboard-mobile-menu {
+  color: #f1f2f6;
+}
+
+/* Smooth theme switching */
+
+.dashboard-layout,
+.dashboard-sidebar,
+.dashboard-topbar,
+.sidebar-link {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
 @media (max-width: 900px) {
   .dashboard-sidebar {
     transform: translateX(-100%);

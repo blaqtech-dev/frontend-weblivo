@@ -28,38 +28,45 @@ export default function EditorWorkspace({ project }) {
       : ""
   );
 
-  const [publishing, setPublishing] = useState(false);
-  const [publishError, setPublishError] = useState("");
+const [publishing, setPublishing] = useState(false);
+const [publishError, setPublishError] = useState("");
+const [publishLimitReached, setPublishLimitReached] = useState(false);
 
   const uploadedImages = project.site_data?.uploaded_images || [];
   const contactDetails = project.site_data?.contact_details || {};
 
-  const handlePublish = async () => {
-    try {
-      setPublishing(true);
-      setPublishError("");
+const handlePublish = async () => {
+  try {
+    setPublishing(true);
+    setPublishError("");
+    setPublishLimitReached(false);
 
-      const result = await publishWebsite(project.id);
+    const result = await publishWebsite(project.id);
 
-      if (!result.success) {
-        throw new Error(result.message || "Unable to publish website.");
-      }
-
-      setStatus("published");
-      setPublishedUrl(`/site/${result.subdomain}`);
-
-    } catch (error) {
-      console.error("Publishing error:", error);
-
-      setPublishError(
-        error.response?.data?.message ||
-        error.message ||
-        "Something went wrong while publishing."
-      );
-    } finally {
-      setPublishing(false);
+    if (!result.success) {
+      throw new Error(result.message || "Unable to publish website.");
     }
-  };
+
+    setStatus("published");
+    setPublishedUrl(`/site/${result.subdomain}`);
+
+  } catch (error) {
+    console.error("Publishing error:", error);
+
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Something went wrong while publishing.";
+
+    setPublishError(message);
+
+    if (message.toLowerCase().includes("publishing limit")) {
+      setPublishLimitReached(true);
+    }
+  } finally {
+    setPublishing(false);
+  }
+};
 
   return (
     <div className="editor-page">
@@ -167,12 +174,17 @@ export default function EditorWorkspace({ project }) {
               </button>
             </div>
           </div>
+{publishError && (
+  <div className="editor-publish-error">
+    <p>{publishError}</p>
 
-          {publishError && (
-            <div className="editor-publish-error">
-              {publishError}
-            </div>
-          )}
+    {publishLimitReached && (
+      <Link href="/pricing" className="editor-pricing-link">
+        View pricing plans →
+      </Link>
+    )}
+  </div>
+)}
 
           {publishedUrl && status === "published" && (
             <div className="editor-published-box">

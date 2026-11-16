@@ -1,0 +1,76 @@
+.payment-callback-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: #f8f9fc;
+}
+
+.payment-callback-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 45px 30px;
+  border: 1px solid #e8eaf0;
+  border-radius: 18px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(20, 20, 50, 0.06);
+}
+
+.payment-callback-card h1 {
+  margin: 20px 0 12px;
+  color: #171725;
+  font-size: 25px;
+}
+
+.payment-callback-card p {
+  color: #707080;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.payment-callback-spinner {
+  color: #6257e8;
+  animation: payment-callback-spin 1s linear infinite;
+}
+
+.payment-callback-success {
+  color: #16a34a;
+}
+
+.payment-callback-failed {
+  color: #dc2626;
+}
+
+.payment-callback-card button {
+  margin-top: 22px;
+  padding: 13px 22px;
+  border: none;
+  border-radius: 9px;
+  background: #6257e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.payment-callback-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.payment-callback-actions a {
+  color: #6257e8;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+@keyframes payment-callback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

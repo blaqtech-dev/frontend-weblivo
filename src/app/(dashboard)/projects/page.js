@@ -23,9 +23,21 @@ async function ProjectsContent() {
 
   const supabase = await createClient();
 
+  const {
+    data: { claims },
+    error: authError,
+  } = await supabase.auth.getClaims();
+
+  if (authError || !claims) {
+    return <ProjectsClient initialProjects={[]} />;
+  }
+
+  const userId = claims.sub;
+
   const { data: projects, error } = await supabase
     .from("projects")
     .select("id, name, business_name, description, status, created_at")
+    .eq("user_id", userId)
     .order("created_at", { ascending: false });
 
   if (error) {

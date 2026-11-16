@@ -208,6 +208,141 @@
   text-align: center;
 }
 
+
+/* ========================================
+   CREATE WEBSITE - DARK THEME
+======================================== */
+
+.dark-theme .create-back {
+  color: #b0b3c0;
+}
+
+.dark-theme .create-back:hover {
+  color: #a59cff;
+}
+
+.dark-theme .create-icon {
+  background: #292640;
+  color: #a59cff;
+}
+
+.dark-theme .create-header h1 {
+  color: #f1f2f6;
+}
+
+.dark-theme .create-header p {
+  color: #a1a5b3;
+}
+
+.dark-theme .create-form {
+  background: #191b22;
+  border-color: #292c35;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.15);
+}
+
+.dark-theme .create-section-heading h2 {
+  color: #f1f2f6;
+}
+
+.dark-theme .create-field label {
+  color: #d5d7e0;
+}
+
+.dark-theme .create-field input,
+.dark-theme .create-field select,
+.dark-theme .create-field textarea {
+  background: #22252e;
+  border-color: #383b46;
+  color: #f1f2f6;
+}
+
+.dark-theme .create-field input::placeholder,
+.dark-theme .create-field textarea::placeholder {
+  color: #777d8c;
+}
+
+.dark-theme .create-field input:focus,
+.dark-theme .create-field select:focus,
+.dark-theme .create-field textarea:focus {
+  border-color: #7772ed;
+  box-shadow: 0 0 0 3px rgba(119, 114, 237, 0.12);
+}
+
+.dark-theme .create-hint {
+  color: #9298a8;
+}
+
+.dark-theme .create-divider {
+  background: #292c35;
+}
+
+.dark-theme .create-style-option {
+  background: #22252e;
+  border-color: #383b46;
+  color: #c0c3cf;
+}
+
+.dark-theme .create-style-option:hover {
+  border-color: #7772ed;
+}
+
+.dark-theme .create-style-option.active {
+  color: #b4aaff;
+  border-color: #7772ed;
+  background: #302b50;
+}
+
+.dark-theme .create-error {
+  background: #3b2529;
+  color: #ff9292;
+}
+
+.dark-theme .create-note {
+  color: #9298a8;
+}
+
+
+.create-error-box {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 14px 16px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #fef2f2;
+}
+
+.create-error-box .create-error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.create-pricing-link {
+  width: fit-content;
+  color: #6257e8;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.create-pricing-link:hover {
+  text-decoration: underline;
+}
+
+.dark-theme .create-error-box {
+  background: #351f24;
+  border-color: #71343d;
+}
+
+.dark-theme .create-error-box .create-error {
+  color: #fca5a5;
+}
+
+.dark-theme .create-pricing-link {
+  color: #b5adff;
+}
 @media (max-width: 600px) {
   .create-page {
     padding: 15px 14px 40px;

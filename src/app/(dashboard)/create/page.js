@@ -8,31 +8,36 @@ import { ArrowLeft, Sparkles, Globe, Palette } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import "./create.css";
 
+
 export default function CreateWebsitePage() {
   const router = useRouter();
   const supabase = createClient();
 
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("");
-const [description, setDescription] = useState(() => {
-  if (typeof window !== "undefined") {
-    return new URLSearchParams(window.location.search).get("idea") || "";
-  }
-  return "";
-});
-const [phone, setPhone] = useState("");
-const [email, setEmail] = useState("");
-const [location, setLocation] = useState("");
-const [businessHours, setBusinessHours] = useState("");
-const [style, setStyle] = useState("Modern");
+  const [projectLimitReached, setProjectLimitReached] = useState(false);
+
+  const [description, setDescription] = useState(() => {
+    if (typeof window !== "undefined") {
+      return new URLSearchParams(window.location.search).get("idea") || "";
+    }
+    return "";
+  });
+
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [businessHours, setBusinessHours] = useState("");
+  const [style, setStyle] = useState("Modern");
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
+   setError("");
+setProjectLimitReached(false);
+setLoading(true);
 
     try {
       const {
@@ -43,33 +48,53 @@ const [style, setStyle] = useState("Modern");
       if (userError) throw userError;
       if (!user) throw new Error("Please log in to create a website.");
 
-  const projectData = {
-  business_type: businessType,
-  design_style: style,
-  contact_details: {
-    phone: phone.trim(),
-    email: email.trim(),
-    location: location.trim(),
-    business_hours: businessHours.trim(),
-  },
-};
+      const projectData = {
+        business_type: businessType,
+        design_style: style,
+        contact_details: {
+          phone: phone.trim(),
+          email: email.trim(),
+          location: location.trim(),
+          business_hours: businessHours.trim(),
+        },
+      };
 
-      const { data, error: insertError } = await supabase
-        .from("projects")
-        .insert({
-          user_id: user.id,
-          name: `${businessName.trim()} Website`,
-          business_name: businessName.trim(),
-          description: description.trim(),
-          status: "draft",
-          site_data: projectData,
-        })
-        .select("id")
-        .single();
+      const { data: projectId, error: createError } =
+        await supabase.rpc("create_user_project", {
+          p_name: `${businessName.trim()} Website`,
+          p_business_name: businessName.trim(),
+          p_description: description.trim(),
+          p_site_data: projectData,
+        });
 
-      if (insertError) throw insertError;
+      if (createError) {
+        console.error("Project creation error:", createError);
 
-    router.push(`/projects?created=${data.id}`);
+     if (createError.message?.includes("PROJECT_LIMIT_REACHED")) {
+  setProjectLimitReached(true);
+  throw new Error(
+    "You have reached your project limit. Upgrade your plan to create more websites."
+  );
+}
+
+        if (
+          createError.message?.includes("BILLING_ACCOUNT_NOT_FOUND")
+        ) {
+          throw new Error(
+            "Your billing account could not be found. Please contact support."
+          );
+        }
+
+        throw new Error(
+          "Unable to create your website project. Please try again."
+        );
+      }
+
+      if (!projectId) {
+        throw new Error("Your project could not be created. Please try again.");
+      }
+
+      router.push(`/projects?created=${projectId}`);
     } catch (err) {
       setError(err.message || "Unable to create your website project.");
     } finally {
@@ -116,7 +141,10 @@ const [style, setStyle] = useState("Modern");
         </div>
 
         <div className="create-field">
-          <label htmlFor="businessType">What type of business do you run?</label>
+          <label htmlFor="businessType">
+            What type of business do you run?
+          </label>
+
           <select
             id="businessType"
             value={businessType}
@@ -136,7 +164,10 @@ const [style, setStyle] = useState("Modern");
         </div>
 
         <div className="create-field">
-          <label htmlFor="description">Describe your business and website</label>
+          <label htmlFor="description">
+            Describe your business and website
+          </label>
+
           <textarea
             id="description"
             placeholder="Tell us what your business offers, who your customers are, and what you want visitors to do on your website..."
@@ -146,6 +177,7 @@ const [style, setStyle] = useState("Modern");
             required
             maxLength={1500}
           />
+
           <span className="create-hint">
             Be as clear as possible. This description will guide the AI later.
           </span>
@@ -153,63 +185,63 @@ const [style, setStyle] = useState("Modern");
 
         <div className="create-divider" />
 
-<div className="create-section-heading">
-  <Globe size={19} />
-  <h2>Business contact information</h2>
-</div>
+        <div className="create-section-heading">
+          <Globe size={19} />
+          <h2>Business contact information</h2>
+        </div>
 
-<p className="create-hint">
-  Add your business contact details so customers can reach you.
-  These fields are optional and can be left blank.
-</p>
+        <p className="create-hint">
+          Add your business contact details so customers can reach you.
+          These fields are optional and can be left blank.
+        </p>
 
-<div className="create-field">
-  <label htmlFor="phone">Phone number</label>
-  <input
-    id="phone"
-    type="tel"
-    placeholder="e.g. +234 801 234 5678"
-    value={phone}
-    onChange={(e) => setPhone(e.target.value)}
-    maxLength={30}
-  />
-</div>
+        <div className="create-field">
+          <label htmlFor="phone">Phone number</label>
+          <input
+            id="phone"
+            type="tel"
+            placeholder="e.g. +234 801 234 5678"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            maxLength={30}
+          />
+        </div>
 
-<div className="create-field">
-  <label htmlFor="email">Business email</label>
-  <input
-    id="email"
-    type="email"
-    placeholder="e.g. hello@yourbusiness.com"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    maxLength={150}
-  />
-</div>
+        <div className="create-field">
+          <label htmlFor="email">Business email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="e.g. hello@yourbusiness.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            maxLength={150}
+          />
+        </div>
 
-<div className="create-field">
-  <label htmlFor="location">Business location</label>
-  <input
-    id="location"
-    type="text"
-    placeholder="e.g. Akungba, Ondo State"
-    value={location}
-    onChange={(e) => setLocation(e.target.value)}
-    maxLength={200}
-  />
-</div>
+        <div className="create-field">
+          <label htmlFor="location">Business location</label>
+          <input
+            id="location"
+            type="text"
+            placeholder="e.g. Akungba, Ondo State"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            maxLength={200}
+          />
+        </div>
 
-<div className="create-field">
-  <label htmlFor="businessHours">Business hours</label>
-  <textarea
-    id="businessHours"
-    placeholder={"e.g. Monday - Saturday: 8 AM - 7 PM\nSunday: Closed"}
-    value={businessHours}
-    onChange={(e) => setBusinessHours(e.target.value)}
-    rows={3}
-    maxLength={500}
-  />
-</div>
+        <div className="create-field">
+          <label htmlFor="businessHours">Business hours</label>
+          <textarea
+            id="businessHours"
+            placeholder={"e.g. Monday - Saturday: 8 AM - 7 PM\nSunday: Closed"}
+            value={businessHours}
+            onChange={(e) => setBusinessHours(e.target.value)}
+            rows={3}
+            maxLength={500}
+          />
+        </div>
 
         <div className="create-divider" />
 
@@ -234,7 +266,17 @@ const [style, setStyle] = useState("Modern");
           ))}
         </div>
 
-        {error && <p className="create-error">{error}</p>}
+       {error && (
+  <div className="create-error-box">
+    <p className="create-error">{error}</p>
+
+    {projectLimitReached && (
+      <Link href="/pricing" className="create-pricing-link">
+        View pricing plans →
+      </Link>
+    )}
+  </div>
+)}
 
         <button
           type="submit"

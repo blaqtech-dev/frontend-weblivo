@@ -500,11 +500,11 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
         ) : null;
 
       case "gallery": {
-        const galleryItems = [
-          ...galleryImages.map((image) => ({
-            image: image.url,
-            caption: image.name,
-          })),
+      const galleryItems = [
+  ...galleryImages.map((image) => ({
+    image: image.url,
+    caption: "",
+  })),
           ...(!galleryImages.length
             ? items.map((item) => ({
                 image:
@@ -712,9 +712,7 @@ style={{
       <main>
         {sections.map(renderSection)}
       </main>
-      <span className="preview-layout-indicator" aria-hidden="true">
-        {heroLayout}
-      </span>
+   
     </div>
   );
 }

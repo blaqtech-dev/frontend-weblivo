@@ -145,7 +145,7 @@
   padding: 13px 22px;
   border: 0;
   border-radius: 8px;
-  background: #5855dc;
+  background: #1a0cb6;
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -213,7 +213,7 @@
   padding: 0 20px;
   border: none;
   border-radius: 9px;
-  background: #5855dc;
+  background: #8888e9;
   color: #fff;
   font-size: 13px;
   font-weight: 650;
@@ -301,6 +301,123 @@
 }
 
 
+/* ========================================
+   WEBSITE EDITOR - DARK THEME
+======================================== */
+
+.dark-theme .editor-loading {
+  color: #a1a5b3;
+}
+
+.dark-theme .editor-back {
+  color: #b0b3c0;
+}
+
+.dark-theme .editor-back:hover {
+  color: #a59cff;
+}
+
+.dark-theme .editor-heading h1 {
+  color: #f1f2f6;
+}
+
+.dark-theme .editor-heading p {
+  color: #a1a5b3;
+}
+
+.dark-theme .editor-status {
+  background: #44351c;
+  color: #f2c36c;
+}
+
+.dark-theme .editor-card {
+  background: #191b22;
+  border-color: #292c35;
+}
+
+.dark-theme .editor-card-heading h2 {
+  color: #f1f2f6;
+}
+
+.dark-theme .editor-detail {
+  border-bottom-color: #292c35;
+}
+
+.dark-theme .editor-detail span,
+.dark-theme .editor-description span {
+  color: #a1a5b3;
+}
+
+.dark-theme .editor-detail strong {
+  color: #e2e4eb;
+}
+
+.dark-theme .editor-description p {
+  color: #c0c3cf;
+}
+
+.dark-theme .editor-generation {
+  background: #191b22;
+  border-color: #393b49;
+}
+
+.dark-theme .editor-generation-icon {
+  background: #292640;
+  color: #a59cff;
+}
+
+.dark-theme .editor-generation h2 {
+  color: #f1f2f6;
+}
+
+.dark-theme .editor-generation p {
+  color: #a1a5b3;
+}
+
+.dark-theme .editor-preview-heading h2 {
+  color: #f1f2f6;
+}
+
+.dark-theme .editor-preview-heading p {
+  color: #a1a5b3;
+}
+
+.dark-theme .editor-publish-error {
+  background: #3b2529;
+  border-color: #67383e;
+  color: #ff9292;
+}
+
+.dark-theme .editor-published-box {
+  background: #173b2b;
+  border-color: #285c42;
+}
+
+.dark-theme .editor-published-box strong {
+  color: #8be0ac;
+}
+
+.dark-theme .editor-published-box p {
+  color: #a3e6ba;
+}
+
+
+.editor-pricing-link {
+  display: inline-block;
+  margin-top: 9px;
+  color: #6257e8;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.editor-pricing-link:hover {
+  text-decoration: underline;
+}
+
+.dark-theme .editor-pricing-link {
+  color: #b5adff;
+}
 
 
 @media (max-width: 600px) {

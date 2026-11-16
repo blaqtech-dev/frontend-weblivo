@@ -353,6 +353,130 @@
   font-size: 12px;
 }
 
+
+/* ========================================
+   MY WEBSITES - DARK THEME
+======================================== */
+
+.dark-theme .projects-heading h1 {
+  color: #f1f2f6;
+}
+
+.dark-theme .projects-heading > div > p:last-child {
+  color: #a1a5b3;
+}
+
+.dark-theme .projects-count {
+  color: #a1a5b3;
+}
+
+.dark-theme .projects-count strong {
+  color: #f1f2f6;
+}
+
+.dark-theme .projects-search {
+  background: #191b22;
+  border-color: #292c35;
+  color: #a1a5b3;
+}
+
+.dark-theme .projects-search input {
+  color: #f1f2f6;
+}
+
+.dark-theme .projects-search input::placeholder {
+  color: #777d8c;
+}
+
+.dark-theme .project-card {
+  background: #191b22;
+  border-color: #292c35;
+}
+
+.dark-theme .project-card:hover {
+  border-color: #6257e8;
+}
+
+.dark-theme .project-preview {
+  background: linear-gradient(135deg, #292640, #22212f 55%, #302b50);
+}
+
+.dark-theme .project-preview-logo {
+  background: #393451;
+  color: #b4aaff;
+}
+
+.dark-theme .project-status {
+  background: #30323d;
+  color: #c0c3cf;
+}
+
+.dark-theme .project-status.published {
+  background: #173b2b;
+  color: #72d69c;
+}
+
+.dark-theme .project-status.draft {
+  background: #44351c;
+  color: #f2c36c;
+}
+
+.dark-theme .project-card-title-row h3 {
+  color: #f1f2f6;
+}
+
+.dark-theme .project-card-title-row > div:first-child > p {
+  color: #9298a8;
+}
+
+.dark-theme .project-menu-button {
+  color: #a1a5b3;
+}
+
+.dark-theme .project-dropdown {
+  background: #22252e;
+  border-color: #383b46;
+}
+
+.dark-theme .project-dropdown button {
+  color: #ff7777;
+}
+
+.dark-theme .project-dropdown button:hover {
+  background: #3b2529;
+}
+
+.dark-theme .project-description {
+  color: #a1a5b3;
+}
+
+.dark-theme .project-card-footer {
+  border-top-color: #292c35;
+}
+
+.dark-theme .project-card-footer > span {
+  color: #858b9a;
+}
+
+.dark-theme .projects-empty {
+  background: #191b22;
+  border-color: #393b49;
+}
+
+.dark-theme .projects-empty h2 {
+  color: #f1f2f6;
+}
+
+.dark-theme .projects-empty > p {
+  color: #a1a5b3;
+}
+
+.dark-theme .projects-empty-icon {
+  background: #292640;
+  color: #a59cff;
+}
+
+
 @media (max-width: 750px) {
   .projects-grid {
     grid-template-columns: 1fr;

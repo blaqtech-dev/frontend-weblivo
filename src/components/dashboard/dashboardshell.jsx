@@ -32,7 +32,11 @@ const navigation = [
   },
 ];
 
-export default function DashboardShell({ children, email }) {
+export default function DashboardShell({
+  children,
+  email,
+  appearance = "light",
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -55,7 +59,7 @@ export default function DashboardShell({ children, email }) {
   };
 
   return (
-    <div className="dashboard-layout">
+   <div className={`dashboard-layout ${appearance === "dark" ? "dark-theme" : "light-theme"}`}>
       {mobileOpen && (
         <button
           className="dashboard-overlay"

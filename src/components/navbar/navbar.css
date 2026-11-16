@@ -115,6 +115,19 @@
   display: none;
 }
 
+/* Logout button styling */
+
+button.navbar-cta {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.mobile-actions button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
 /* Tablet and mobile */
 @media (max-width: 850px) {
   .navbar-container {
