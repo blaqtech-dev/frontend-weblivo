@@ -37,6 +37,7 @@ export default function DashboardShell({
   children,
   email,
   appearance = "light",
+   creditsRemaining = 0,
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -160,11 +161,11 @@ export default function DashboardShell({
           </div>
 
           <div className="topbar-right">
-            <div className="topbar-credit">
-              <Sparkles size={16} />
-              <span>AI Credits</span>
-              <strong>—</strong>
-            </div>
+           <div className="topbar-credit">
+  <Sparkles size={16} />
+  <span>AI Credits</span>
+  <strong>{creditsRemaining}</strong>
+</div>
 
             <div className="topbar-user">
               <div className="topbar-avatar">

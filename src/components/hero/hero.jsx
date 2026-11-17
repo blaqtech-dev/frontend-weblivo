@@ -12,17 +12,27 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import "./hero.css";
-
+import { useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 export default function Hero() {
     const router = useRouter();
   const [prompt, setPrompt] = useState("");
 
-const handleGenerate = () => {
-  if (!prompt.trim()) return;
+const handleGenerate = async () => {
+  const idea = prompt.trim();
 
-  router.push(`/signup?idea=${encodeURIComponent(prompt.trim())}`);
+  if (!idea) return;
+
+  const supabase = createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (user) {
+    router.push(`/create?idea=${encodeURIComponent(idea)}`);
+  } else {
+    router.push(`/signup?idea=${encodeURIComponent(idea)}`);
+  }
 };
-
   return (
     <section className="hero-section">
       <div className="hero-background-glow"></div>
@@ -56,7 +66,7 @@ const handleGenerate = () => {
             <textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="e.g. Create a modern website for my beauty salon with a booking section, services, gallery and customer testimonials..."
+              placeholder="e.g. Create a modern website for my beauty salon with a gallery section and a beautiful layout"
               rows={3}
             />
 

@@ -41,12 +41,21 @@ async function ProtectedDashboard({ children }) {
     .eq("user_id", userId)
     .maybeSingle();
 
+    const { data: billing } = await supabase
+  .from("user_billing")
+  .select("credits_remaining")
+  .eq("user_id", userId)
+  .maybeSingle();
+
+const creditsRemaining = billing?.credits_remaining ?? 0;
+
   const appearance = workspaceSettings?.appearance || "light";
 
   return (
     <DashboardShell
       email={claims.email}
       appearance={appearance}
+       creditsRemaining={creditsRemaining}
     >
       {children}
     </DashboardShell>
