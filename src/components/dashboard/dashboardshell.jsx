@@ -31,7 +31,15 @@ const navigation = [
     href: "/projects",
     icon: Globe,
   },
+  {
+    title:'Upgrade Plan',
+    href:'/pricing',
+    icon:Sparkles,
+  }
 ];
+
+   
+
 
 export default function DashboardShell({
   children,
@@ -101,6 +109,7 @@ export default function DashboardShell({
           </nav>
         </div>
 
+   
         <Link
          href="/create"
           className="sidebar-create-button"
