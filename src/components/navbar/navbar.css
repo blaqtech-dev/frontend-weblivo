@@ -73,6 +73,7 @@
 .navbar-login {
   text-decoration: none;
   color: #34384a;
+  
   font-size: 14px;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -126,13 +127,35 @@ button.navbar-cta {
 .mobile-actions button {
   cursor: pointer;
   font-family: inherit;
+   background:blue;
+   color:white;
+}
+
+.navbar-install {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.navbar-install .pwa-install-button {
+  position: static;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Tablet and mobile */
-@media (max-width: 850px) {
-  .navbar-container {
-    padding: 0 24px;
-  }
+@media (max-width: 1050px) {
+.navbar-container {
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+.navbar-install {
+  margin-left: auto;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
 
   .navbar-links,
   .navbar-actions {
@@ -181,12 +204,14 @@ button.navbar-cta {
     display: flex;
     flex-direction: column;
     gap: 17px;
+    
     padding-top: 15px;
     border-top: 1px solid #edf0f5;
   }
 
   .mobile-actions .navbar-cta {
     width: fit-content;
+     
   }
 }
 

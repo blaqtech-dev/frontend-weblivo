@@ -13,6 +13,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+
+import PWAInstall from "@/components/pwa-install";
 import "./navbar.css";
 
 export default function Navbar() {
@@ -82,6 +84,11 @@ const handleLogout = async () => {
           </span>
         </Link>
 
+        {/* Install WEBLIVO */}
+<div className="navbar-install">
+  <PWAInstall />
+</div>
+
         {/* Desktop Navigation */}
         <nav className="navbar-links">
           <Link href="/" className="navbar-link">Home</Link>
@@ -94,6 +101,7 @@ const handleLogout = async () => {
 
         {/* Desktop Actions */}
         <div className="navbar-actions">
+         
           {!loading && (
             user ? (
               <>

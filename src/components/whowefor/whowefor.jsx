@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Scissors,
@@ -9,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { createClient } from "@/lib/supabase/client";
 import "./whowefor.css";
 
 const audiences = [
@@ -39,6 +43,30 @@ const audiences = [
 ];
 
 export default function WhoWeFor() {
+  const [destination, setDestination] = useState(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => {
+      setDestination(data.user ? "/create" : "/signup");
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setDestination(session?.user ? "/create" : "/signup");
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleNavigation = (event) => {
+    if (!destination) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <section className="audience-section" id="who-its-for">
       <div className="audience-container">
@@ -76,7 +104,12 @@ export default function WhoWeFor() {
                 <h3>{item.title}</h3>
                 <p>{item.examples}</p>
 
-                <Link href="/signup" className="audience-link">
+                <Link
+                  href={destination || "/signup"}
+                  onClick={handleNavigation}
+                  aria-disabled={!destination}
+                  className="audience-link"
+                >
                   Create your website
                   <ArrowUpRight size={16} />
                 </Link>
@@ -90,7 +123,11 @@ export default function WhoWeFor() {
             Have a different business idea?
             <strong> WEBLIVO can help you bring it online too.</strong>
           </p>
-          <Link href="/signup">
+
+          <Link
+            href={destination || "/signup"}
+            onClick={handleNavigation}
+          >
             Start building <ArrowUpRight size={16} />
           </Link>
         </div>

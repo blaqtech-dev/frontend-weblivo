@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+
 import {
   LayoutDashboard,
   Globe,
@@ -114,11 +115,12 @@ export default function DashboardShell({
             <span>Settings</span>
           </Link>
 
-          <a href="mailto:support@weblivo.com" className="sidebar-link">
-            <HelpCircle size={19} />
-            <span>Help & Support</span>
-          </a>
-
+         
+            
+<Link href="/help" className="sidebar-link">
+  <HelpCircle size={19} />
+  <span>Help & Support</span>
+</Link>
           <div className="sidebar-user">
             <div className="sidebar-avatar">
               {email?.charAt(0)?.toUpperCase() || "U"}

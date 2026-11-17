@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   MessageSquareText,
@@ -8,6 +11,7 @@ import {
   Check,
 } from "lucide-react";
 
+import { createClient } from "@/lib/supabase/client";
 import "./howitworks.css";
 
 const steps = [
@@ -38,6 +42,30 @@ const steps = [
 ];
 
 export default function HowItWorks() {
+  const [destination, setDestination] = useState(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => {
+      setDestination(data.user ? "/create" : "/signup");
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setDestination(session?.user ? "/create" : "/signup");
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleNavigation = (event) => {
+    if (!destination) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <section className="how-section" id="how-it-works">
       <div className="how-container">
@@ -100,7 +128,12 @@ export default function HowItWorks() {
             <p>Your next website could start with just one description.</p>
           </div>
 
-          <Link href="/signup" className="how-button">
+          <Link
+            href={destination || "/signup"}
+            onClick={handleNavigation}
+            className="how-button"
+            aria-disabled={!destination}
+          >
             Get started <ArrowRight size={17} />
           </Link>
         </div>

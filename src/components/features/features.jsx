@@ -1,4 +1,10 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+
 import {
   Sparkles,
   MonitorSmartphone,
@@ -56,10 +62,33 @@ const features = [
 ];
 
 export default function Features() {
+  const [destination, setDestination] = useState("/signup");
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setDestination(user ? "/create" : "/signup");
+    };
+
+    checkUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setDestination(session?.user ? "/create" : "/signup");
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <section className="features-section" id="features">
       <div className="features-container">
-
         <div className="features-heading">
           <span className="features-label">
             <Sparkles size={15} />
@@ -118,11 +147,13 @@ export default function Features() {
             </div>
           </div>
 
-          <a href="/signup" className="features-bottom-button">
+          <Link
+            href={destination}
+            className="features-bottom-button"
+          >
             Start building
-          </a>
+          </Link>
         </div>
-
       </div>
     </section>
   );

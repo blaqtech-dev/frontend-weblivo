@@ -1,0 +1,30 @@
+
+.admin-subscription-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.admin-subscription-stats .admin-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-subscription-stats .admin-stat-card span {
+  color: #777;
+  font-size: 13px;
+}
+
+.admin-subscription-stats .admin-stat-card strong {
+  font-size: 25px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .admin-subscription-stats {
+    grid-template-columns: 1fr;
+  }
+}

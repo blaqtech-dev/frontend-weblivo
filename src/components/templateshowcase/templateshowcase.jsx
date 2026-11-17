@@ -1,5 +1,10 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+
 import {
   ArrowUpRight,
   Sparkles,
@@ -48,6 +53,30 @@ const templates = [
 ];
 
 export default function TemplateShowcase() {
+  const [destination, setDestination] = useState("/signup");
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setDestination(user ? "/create" : "/signup");
+    };
+
+    checkUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setDestination(session?.user ? "/create" : "/signup");
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <section className="template-section" id="templates">
       <div className="template-container">
@@ -88,6 +117,7 @@ export default function TemplateShowcase() {
                   <span className="template-category">
                     {template.category}
                   </span>
+
                   <h3>{template.name}</h3>
                   <p>{template.description}</p>
                 </div>
@@ -109,7 +139,7 @@ export default function TemplateShowcase() {
             </p>
           </div>
 
-          <Link href="/signup" className="template-button">
+          <Link href={destination} className="template-button">
             Create your website <ArrowUpRight size={17} />
           </Link>
         </div>
