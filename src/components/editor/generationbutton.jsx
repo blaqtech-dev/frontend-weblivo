@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Sparkles, LoaderCircle } from "lucide-react";
 import { generateWebsite } from "@/services/generationservice";
 import "./generationbutton.css";
@@ -11,6 +12,8 @@ export default function GenerationButton({
   alreadyGenerated,
   onGenerated,
 }) {
+
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -33,9 +36,12 @@ export default function GenerationButton({
         throw new Error("Generated website data was not returned.");
       }
 
-      onGenerated?.(newWebsiteData);
+    onGenerated?.(newWebsiteData);
 
-      setSuccess("Your website has been generated successfully!");
+// Refresh server components to update navbar AI credits
+router.refresh();
+
+setSuccess("Your website has been generated successfully!");
     } catch (err) {
       const message =
         err.response?.data?.message ||
