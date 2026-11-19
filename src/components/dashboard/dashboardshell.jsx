@@ -15,6 +15,7 @@ import {
   LogOut,
   Menu,
   X,
+  CalendarDays,
   Sparkles,
   ChevronDown,
 } from "lucide-react";
@@ -31,6 +32,11 @@ const navigation = [
     href: "/projects",
     icon: Globe,
   },
+  {
+  title: "Bookings",
+  href: "/bookings",
+  icon: CalendarDays,
+},
   {
     title:'Upgrade Plan',
     href:'/pricing',

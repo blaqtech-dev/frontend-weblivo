@@ -12,7 +12,7 @@ import "./create.css";
 export default function CreateWebsitePage() {
   const router = useRouter();
   const supabase = createClient();
-
+const [whatsapp, setWhatsapp] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [projectLimitReached, setProjectLimitReached] = useState(false);
@@ -51,12 +51,13 @@ setLoading(true);
       const projectData = {
         business_type: businessType,
         design_style: style,
-        contact_details: {
-          phone: phone.trim(),
-          email: email.trim(),
-          location: location.trim(),
-          business_hours: businessHours.trim(),
-        },
+     contact_details: {
+  phone: phone.trim(),
+  whatsapp: whatsapp.trim(),
+  email: email.trim(),
+  location: location.trim(),
+  business_hours: businessHours.trim(),
+},
       };
 
       const { data: projectId, error: createError } =
@@ -206,6 +207,21 @@ setLoading(true);
             maxLength={30}
           />
         </div>
+
+        <div className="create-field">
+  <label htmlFor="whatsapp">WhatsApp number</label>
+  <input
+    id="whatsapp"
+    type="tel"
+    placeholder="e.g. +234 801 234 5678"
+    value={whatsapp}
+    onChange={(e) => setWhatsapp(e.target.value)}
+    maxLength={30}
+  />
+  <span className="create-hint">
+    Customers can use this number to contact your business directly on WhatsApp.
+  </span>
+</div>
 
         <div className="create-field">
           <label htmlFor="email">Business email</label>

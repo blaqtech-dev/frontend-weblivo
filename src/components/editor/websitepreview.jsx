@@ -9,10 +9,12 @@ import {
   Sparkles,
    Pencil,
   Check,
+    MessageCircle,
   X,
   Menu,
 } from "lucide-react";
 import "./websitepreview.css";
+import BookingForm from "../website/bookingform";
 
 const navigationLabels = {
   about: "About",
@@ -121,7 +123,19 @@ function getAccessibleBrandColor(foreground, background) {
 }
 
 
+function getWhatsAppLink(number) {
+  const cleanNumber = String(number || "").replace(/\D/g, "");
 
+  if (cleanNumber.length < 8 || cleanNumber.length > 15) {
+    return null;
+  }
+
+  const message = encodeURIComponent(
+    "Hello, I'm interested in your services."
+  );
+
+  return `https://wa.me/${cleanNumber}?text=${message}`;
+}
 
 
 function EditableText({
@@ -206,9 +220,19 @@ export default function WebsitePreview({
   uploadedImages = [],
   contactDetails = {},
   onTextChange,
+  projectId,
+  bookingEnabled = false,
+  isPublished = false,
 }) {
 const isEditable = typeof onTextChange === "function";
+
+const servicesSection = websiteData?.sections?.find(
+  (section) => section.type === "services"
+);
+
+const bookingServices = servicesSection?.items || [];
       const [menuOpen, setMenuOpen] = useState(false);
+      const whatsappLink = getWhatsAppLink(contactDetails.whatsapp);
 
   if (!websiteData || !Array.isArray(websiteData.sections)) {
     return <p>Website preview is not available.</p>;
@@ -585,6 +609,19 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
           </div>
         )}
 
+        {contactDetails.whatsapp && (
+  <div>
+    <strong>WhatsApp:</strong>{" "}
+    <a
+      href={whatsappLink || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {contactDetails.whatsapp}
+    </a>
+  </div>
+)}
+
         {contactDetails.email && (
           <div>
             <strong>Email:</strong>{" "}
@@ -611,6 +648,7 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
 
         {!contactDetails.phone &&
           !contactDetails.email &&
+          !contactDetails.whatsapp &&
           !contactDetails.location &&
           !contactDetails.business_hours && (
             <p>Contact information has not been added yet.</p>
@@ -708,11 +746,30 @@ style={{
           ))}
         </nav>
       </header>
+    <main>
+  {sections.map(renderSection)}
 
-      <main>
-        {sections.map(renderSection)}
-      </main>
-   
+  {bookingEnabled && (
+    <BookingForm
+      projectId={projectId}
+      services={bookingServices}
+      isPublished={isPublished}
+    />
+  )}
+</main>
+      {whatsappLink && (
+        <a
+          href={whatsappLink}
+          className="preview-whatsapp-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+          title="Chat with us on WhatsApp"
+        >
+          <MessageCircle size={25} />
+          <span>Chat with us</span>
+        </a>
+      )}
     </div>
   );
 }

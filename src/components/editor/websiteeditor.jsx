@@ -1,5 +1,6 @@
 
 "use client";
+
 import { useEffect, useState } from "react";
 import { Save, LoaderCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -7,48 +8,64 @@ import ImageUploader from "./imageuploader";
 import WebsitePreview from "./websitepreview";
 import "./websiteeditor.css";
 
+const bookingBusinessTypes = [
+  "salon",
+  "beauty",
+  "photography",
+  "consulting",
+  "tutoring",
+  "education",
+  "spa",
+  "fitness",
+  "healthcare",
+];
 
 export default function WebsiteEditor({
   projectId,
   initialWebsiteData,
   uploadedImages = [],
   contactDetails = {},
+  businessType = "",
 }) {
   const [websiteData, setWebsiteData] = useState(initialWebsiteData);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-  setWebsiteData(initialWebsiteData);
-  setMessage("");
-}, [initialWebsiteData]);
+    setWebsiteData(initialWebsiteData);
+    setMessage("");
+  }, [initialWebsiteData]);
 
+  const normalizedBusinessType = String(businessType).toLowerCase();
 
-const handleTextChange = (sectionIndex, field, value, itemIndex) => {
-  setWebsiteData((previous) => {
-    const updated = structuredClone(previous);
+  const bookingEnabled = bookingBusinessTypes.some((type) =>
+    normalizedBusinessType.includes(type)
+  );
 
-    if (sectionIndex === null) {
-      updated[field] = value;
-      return updated;
-    }
+  const handleTextChange = (sectionIndex, field, value, itemIndex) => {
+    setWebsiteData((previous) => {
+      const updated = structuredClone(previous);
 
-    if (itemIndex !== undefined) {
-      if (field === "value") {
-        updated.sections[sectionIndex].items[itemIndex] = value;
-      } else {
-        updated.sections[sectionIndex].items[itemIndex][field] = value;
+      if (sectionIndex === null) {
+        updated[field] = value;
+        return updated;
       }
-    } else {
-      updated.sections[sectionIndex][field] = value;
-    }
 
-    return updated;
-  });
+      if (itemIndex !== undefined) {
+        if (field === "value") {
+          updated.sections[sectionIndex].items[itemIndex] = value;
+        } else {
+          updated.sections[sectionIndex].items[itemIndex][field] = value;
+        }
+      } else {
+        updated.sections[sectionIndex][field] = value;
+      }
 
-  setMessage("");
-};
+      return updated;
+    });
 
+    setMessage("");
+  };
 
   const saveChanges = async () => {
     try {
@@ -57,8 +74,6 @@ const handleTextChange = (sectionIndex, field, value, itemIndex) => {
 
       const supabase = createClient();
 
-      // Fetch the latest project data so image uploads
-      // and other saved settings are not overwritten.
       const { data: latestProject, error: fetchError } = await supabase
         .from("projects")
         .select("site_data")
@@ -122,12 +137,15 @@ const handleTextChange = (sectionIndex, field, value, itemIndex) => {
         </p>
       )}
 
-    <WebsitePreview
-  websiteData={websiteData}
-  uploadedImages={uploadedImages}
-  contactDetails={contactDetails}
-  onTextChange={handleTextChange}
-/>
+      <WebsitePreview
+        websiteData={websiteData}
+        uploadedImages={uploadedImages}
+        contactDetails={contactDetails}
+        onTextChange={handleTextChange}
+        projectId={projectId}
+        bookingEnabled={bookingEnabled}
+        isPublished={false}
+      />
     </div>
   );
 }

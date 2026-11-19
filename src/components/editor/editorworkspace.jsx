@@ -34,6 +34,10 @@ const [publishLimitReached, setPublishLimitReached] = useState(false);
 
   const uploadedImages = project.site_data?.uploaded_images || [];
   const contactDetails = project.site_data?.contact_details || {};
+  const businessType =
+  project.business_type ||
+  project.site_data?.business_type ||
+  "";
 
 const handlePublish = async () => {
   try {
@@ -208,12 +212,13 @@ const handlePublish = async () => {
             </div>
           )}
 
-          <WebsiteEditor
-            projectId={project.id}
-            initialWebsiteData={websiteData}
-            uploadedImages={uploadedImages}
-            contactDetails={contactDetails}
-          />
+        <WebsiteEditor
+  projectId={project.id}
+  initialWebsiteData={websiteData}
+  uploadedImages={uploadedImages}
+  contactDetails={contactDetails}
+  businessType={businessType}
+/>
         </div>
       )}
     </div>

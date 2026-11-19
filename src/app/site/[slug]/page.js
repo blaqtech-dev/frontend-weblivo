@@ -23,7 +23,7 @@ async function PublicWebsiteContent({ params }) {
 
   const { data: project, error } = await supabase
     .from("projects")
-    .select("id, name, business_name, status, subdomain, site_data")
+    .select("id, name, business_name, business_type, status, subdomain, site_data")
     .eq("subdomain", slug)
     .eq("status", "published")
     .maybeSingle();
@@ -32,11 +32,34 @@ async function PublicWebsiteContent({ params }) {
     notFound();
   }
 
+  // Enable appointment booking for supported business categories.
+ const businessType = String(
+  project.business_type || ""
+).toLowerCase();
+  const bookingBusinessTypes = [
+    "salon",
+    "beauty",
+    "photography",
+    "consulting",
+    "tutoring",
+    "education",
+    "spa",
+    "fitness",
+    "healthcare",
+  ];
+
+  const bookingEnabled = bookingBusinessTypes.some((type) =>
+    businessType.includes(type)
+  );
+
   return (
     <WebsitePreview
       websiteData={project.site_data.generated}
       uploadedImages={project.site_data.uploaded_images || []}
       contactDetails={project.site_data.contact_details || {}}
+      projectId={project.id}
+      bookingEnabled={bookingEnabled}
+      isPublished={true}
     />
   );
 }
