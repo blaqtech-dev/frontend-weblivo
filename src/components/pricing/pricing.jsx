@@ -91,51 +91,68 @@ export default function Pricing() {
   const [processingPlan, setProcessingPlan] = useState("");
   const [paymentError, setPaymentError] = useState("");
 
-  useEffect(() => {
-    const supabase = createClient();
+useEffect(() => {
+  const supabase = createClient();
+  let mounted = true;
 
-    const loadUser = async () => {
-      try {
-        const {
-          data: { user: currentUser },
-          error: authError,
-        } = await supabase.auth.getUser();
+  const loadAccount = async (currentUser) => {
+    if (!mounted) return;
 
-        if (authError) throw authError;
+    setUser(currentUser);
 
-        setUser(currentUser);
+    if (!currentUser) {
+      setCurrentPlan("free");
+      setAuthLoading(false);
+      return;
+    }
 
-        if (currentUser) {
-          const { data: billing, error: billingError } =
-            await supabase
-              .from("user_billing")
-              .select("plan")
-              .eq("user_id", currentUser.id)
-              .maybeSingle();
+    const { data: billing, error: billingError } = await supabase
+      .from("user_billing")
+      .select("plan")
+      .eq("user_id", currentUser.id)
+      .maybeSingle();
 
-          if (billingError) throw billingError;
+    if (!mounted) return;
 
-          setCurrentPlan(billing?.plan || "free");
-        } else {
-          setCurrentPlan("free");
-        }
-      } catch (error) {
-        console.error("Pricing account error:", error);
-      } finally {
-        setAuthLoading(false);
+    if (billingError) {
+      console.error("Pricing billing error:", billingError.message);
+    }
+
+    setCurrentPlan(billing?.plan || "free");
+    setAuthLoading(false);
+  };
+
+  const initializeAccount = async () => {
+    const { data, error } = await supabase.auth.getSession();
+
+    if (!mounted) return;
+
+    if (error) {
+      console.error("Pricing session error:", error.message);
+      setAuthLoading(false);
+      return;
+    }
+
+    await loadAccount(data.session?.user || null);
+  };
+
+  initializeAccount();
+
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((event, session) => {
+    setTimeout(() => {
+      if (mounted) {
+        loadAccount(session?.user || null);
       }
-    };
+    }, 0);
+  });
 
-    loadUser();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      loadUser();
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  return () => {
+    mounted = false;
+    subscription.unsubscribe();
+  };
+}, []);
 
   const handleSubscribe = async (planId) => {
     if (!user || !["pro", "business"].includes(planId)) {
