@@ -28,9 +28,20 @@ async function PublicWebsiteContent({ params }) {
     .eq("status", "published")
     .maybeSingle();
 
-  if (error || !project || !project.site_data?.generated) {
-    notFound();
-  }
+  if (error) {
+  console.error("PUBLIC WEBSITE QUERY ERROR:", error);
+  notFound();
+}
+
+if (!project) {
+  console.error("PUBLIC WEBSITE NOT FOUND. SLUG:", slug);
+  notFound();
+}
+
+if (!project.site_data?.generated) {
+  console.error("GENERATED WEBSITE DATA MISSING:", project.id);
+  notFound();
+}
 
   // Enable appointment booking for supported business categories.
  const businessType = String(
