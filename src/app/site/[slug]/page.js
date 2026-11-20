@@ -21,12 +21,12 @@ async function PublicWebsiteContent({ params }) {
 
   const supabase = await createClient();
 
-  const { data: project, error } = await supabase
-    .from("projects")
-    .select("id, name, business_name, business_type, status, subdomain, site_data")
-    .eq("subdomain", slug)
-    .eq("status", "published")
-    .maybeSingle();
+ const { data: project, error } = await supabase
+  .from("projects")
+  .select("id, name, business_name, status, subdomain, site_data")
+  .eq("subdomain", slug)
+  .eq("status", "published")
+  .maybeSingle();
 
   if (error) {
   console.error("PUBLIC WEBSITE QUERY ERROR:", error);
@@ -44,8 +44,8 @@ if (!project.site_data?.generated) {
 }
 
   // Enable appointment booking for supported business categories.
- const businessType = String(
-  project.business_type || ""
+const businessType = String(
+  project.site_data?.business_type || ""
 ).toLowerCase();
   const bookingBusinessTypes = [
     "salon",
