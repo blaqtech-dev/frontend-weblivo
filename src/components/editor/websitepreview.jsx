@@ -746,9 +746,17 @@ style={{
           ))}
         </nav>
       </header>
-    <main>
-  {sections.map(renderSection)}
+<main>
+  {/* Main website sections */}
+  {sections
+    .filter(
+      (section) =>
+        section.type !== "contact" &&
+        section.type !== "footer"
+    )
+    .map(renderSection)}
 
+  {/* Appointment booking */}
   {bookingEnabled && (
     <BookingForm
       projectId={projectId}
@@ -756,6 +764,16 @@ style={{
       isPublished={isPublished}
     />
   )}
+
+  {/* Contact section */}
+  {sections
+    .filter((section) => section.type === "contact")
+    .map(renderSection)}
+
+  {/* Footer */}
+  {sections
+    .filter((section) => section.type === "footer")
+    .map(renderSection)}
 </main>
       {whatsappLink && (
         <a
