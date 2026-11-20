@@ -555,27 +555,32 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
             </div>
 
             <div className="preview-gallery-grid">
-              {galleryItems.map((item, itemIndex) => (
-                <div className="preview-gallery-item" key={itemIndex}>
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.caption || "Business gallery image"}
-                    />
-                  ) : (
-                    <div className="preview-gallery-placeholder">
-                      <Sparkles size={22} />
-                      <span>{item.caption || "Gallery image"}</span>
-                    </div>
-                  )}
+             
+{galleryItems.map((item, itemIndex) => (
+  <article className="preview-gallery-item" key={itemIndex}>
+    <div className="preview-gallery-image">
+      {item.image ? (
+        <img
+          src={item.image}
+          alt={item.caption || `${siteName} gallery image`}
+          loading="lazy"
+        />
+      ) : (
+        <div className="preview-gallery-placeholder">
+          <Sparkles size={22} />
+          <span>{item.caption || "Gallery image"}</span>
+        </div>
+      )}
+    </div>
 
-                  {item.caption && (
-                    <p className="preview-gallery-caption">
-                      {item.caption}
-                    </p>
-                  )}
-                </div>
-              ))}
+    {item.caption && (
+      <p className="preview-gallery-caption">
+        {item.caption}
+      </p>
+    )}
+  </article>
+))}
+
             </div>
           </section>
         );
