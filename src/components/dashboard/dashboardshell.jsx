@@ -12,6 +12,7 @@ import {
   Plus,
   Settings,
   HelpCircle,
+  MessageSquare,
   LogOut,
   Menu,
   X,
@@ -36,6 +37,11 @@ const navigation = [
   title: "Bookings",
   href: "/bookings",
   icon: CalendarDays,
+},
+{
+  title: "Enquiries",
+  href: "/enquiries",
+  icon: MessageSquare,
 },
   {
     title:'Upgrade Plan',

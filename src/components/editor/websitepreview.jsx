@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import "./websitepreview.css";
 import BookingForm from "../website/bookingform";
+import EnquiryForm from "../website/enquiryform";
 
 const navigationLabels = {
   about: "About",
@@ -766,9 +767,16 @@ style={{
   )}
 
   {/* Contact section */}
+  {/* Contact section */}
   {sections
     .filter((section) => section.type === "contact")
     .map(renderSection)}
+
+  {/* Customer Enquiry Form */}
+  <EnquiryForm
+    projectId={projectId}
+    isPublished={isPublished}
+  />
 
   {/* Footer */}
   {sections
