@@ -367,37 +367,84 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
         );
       }
 
-      case "about":
+   
+   
+      case "about": {
+        const requestedLayout = section.layout || "default";
+
+        const supportedLayouts = [
+          "centered",
+          "split",
+          "minimal",
+          "image-left",
+          "image-right",
+        ];
+
+        const aboutLayout = supportedLayouts.includes(requestedLayout)
+          ? requestedLayout
+          : "default";
+
+        const aboutImage = section.image?.url;
+
+        const effectiveLayout =
+          (aboutLayout === "image-left" ||
+            aboutLayout === "image-right") &&
+          !aboutImage
+            ? "split"
+            : aboutLayout;
+
         return (
           <section
-            className={`preview-section preview-about preview-layout-${section.layout || "default"}`}
+            className={`preview-section preview-about preview-layout-${effectiveLayout}`}
             id="about"
             key={index}
           >
-           <div className="preview-section-label">OUR STORY</div>
-        <h2>
-  <EditableText
-  editable={isEditable}
-    value={section.heading}
-    onSave={(value) => onTextChange?.(index, "heading", value)}
-  />
-</h2>
-       <p>
-  <EditableText
-  editable={isEditable}
-    multiline
-    value={section.content || section.subheading || ""}
-    onSave={(value) =>
-      onTextChange?.(
-        index,
-        section.content ? "content" : "subheading",
-        value
-      )
-    }
-  />
-</p>
+            <div className="preview-about-heading">
+              <div className="preview-section-label">OUR STORY</div>
+
+              <h2>
+                <EditableText
+                  editable={isEditable}
+                  value={section.heading}
+                  onSave={(value) =>
+                    onTextChange?.(index, "heading", value)
+                  }
+                />
+              </h2>
+            </div>
+
+            <div className="preview-about-description">
+              <p>
+                <EditableText
+                  editable={isEditable}
+                  multiline
+                  value={section.content || section.subheading || ""}
+                  onSave={(value) =>
+                    onTextChange?.(
+                      index,
+                      section.content ? "content" : "subheading",
+                      value
+                    )
+                  }
+                />
+              </p>
+            </div>
+
+            {(effectiveLayout === "image-left" ||
+              effectiveLayout === "image-right") &&
+              aboutImage && (
+                <div className="preview-about-media">
+                  <img
+                    src={aboutImage}
+                    alt={`${siteName} story`}
+                    loading="lazy"
+                  />
+                </div>
+              )}
           </section>
         );
+      }
+
 
       case "services":
         return (
@@ -523,69 +570,131 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
             </div>
           </section>
         ) : null;
+case "gallery": {
+  const galleryItems = [
+    ...items.map((item) => ({
+      ...(typeof item === "object" ? item : { caption: item }),
+      image:
+        typeof item === "object" ? item.image?.url || null : null,
+    })),
+  ];
 
-      case "gallery": {
-      const galleryItems = [
-  ...galleryImages.map((image) => ({
-    image: image.url,
-    caption: "",
-  })),
-          ...(!galleryImages.length
-            ? items.map((item) => ({
-                image:
-                  typeof item === "object" ? item.image?.url : null,
-                caption:
-                  typeof item === "string"
-                    ? item
-                    : item.caption || item.title,
-              }))
-            : []),
-        ];
+  // Uploaded images are added without removing AI-generated details.
+  galleryImages.forEach((uploadedImage, imageIndex) => {
+    const existingItem = galleryItems[imageIndex];
 
-        return (
-          <section
-            className="preview-section preview-gallery-section"
-            id="gallery"
-            key={index}
-          >
-            <div className="preview-section-heading">
-              <div className="preview-section-label">OUR COLLECTION</div>
-              <h2>{section.heading}</h2>
-              {section.subheading && <p>{section.subheading}</p>}
+    if (existingItem) {
+      existingItem.image = uploadedImage.url;
+    } else {
+      galleryItems.push({
+        image: uploadedImage.url,
+        title: "",
+        description: "",
+        price: "",
+        category: "",
+        caption: "",
+      });
+    }
+  });
+
+  return (
+    <section
+      className="preview-section preview-gallery-section"
+      id="gallery"
+      key={index}
+    >
+      <div className="preview-section-heading">
+        <div className="preview-section-label">OUR COLLECTION</div>
+
+        <h2>
+          <EditableText
+            value={section.heading}
+            editable={isEditable}
+            onSave={(value) =>
+              onTextChange?.(index, "heading", value)
+            }
+          />
+        </h2>
+
+        {section.subheading && (
+          <p>{section.subheading}</p>
+        )}
+      </div>
+
+      <div className="preview-gallery-grid">
+        {galleryItems.map((item, itemIndex) => (
+          <article className="preview-gallery-item" key={itemIndex}>
+            <div className="preview-gallery-image">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.title || item.caption || `${siteName} gallery image`}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="preview-gallery-placeholder">
+                  <Sparkles size={22} />
+                  <span>
+                    {item.title || item.caption || "Gallery image"}
+                  </span>
+                </div>
+              )}
             </div>
 
-            <div className="preview-gallery-grid">
-             
-{galleryItems.map((item, itemIndex) => (
-  <article className="preview-gallery-item" key={itemIndex}>
-    <div className="preview-gallery-image">
-      {item.image ? (
-        <img
-          src={item.image}
-          alt={item.caption || `${siteName} gallery image`}
-          loading="lazy"
-        />
-      ) : (
-        <div className="preview-gallery-placeholder">
-          <Sparkles size={22} />
-          <span>{item.caption || "Gallery image"}</span>
-        </div>
-      )}
-    </div>
+            {(item.title || isEditable) && (
+              <h3 className="preview-gallery-title">
+                <EditableText
+                  value={item.title || ""}
+                  editable={isEditable}
+                  onSave={(value) =>
+                    onTextChange?.(index, "title", value, itemIndex)
+                  }
+                />
+              </h3>
+            )}
 
-    {item.caption && (
-      <p className="preview-gallery-caption">
-        {item.caption}
-      </p>
-    )}
-  </article>
-))}
+            {(item.description || isEditable) && (
+              <p className="preview-gallery-description">
+                <EditableText
+                  value={item.description || ""}
+                  multiline
+                  editable={isEditable}
+                  onSave={(value) =>
+                    onTextChange?.(index, "description", value, itemIndex)
+                  }
+                />
+              </p>
+            )}
 
-            </div>
-          </section>
-        );
-      }
+            {(item.price || isEditable) && (
+              <p className="preview-gallery-price">
+                <EditableText
+                  value={item.price || ""}
+                  editable={isEditable}
+                  onSave={(value) =>
+                    onTextChange?.(index, "price", value, itemIndex)
+                  }
+                />
+              </p>
+            )}
 
+            {item.caption && (
+              <p className="preview-gallery-caption">
+                <EditableText
+                  value={item.caption}
+                  editable={isEditable}
+                  onSave={(value) =>
+                    onTextChange?.(index, "caption", value, itemIndex)
+                  }
+                />
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
     case "contact":
   return (
     <section

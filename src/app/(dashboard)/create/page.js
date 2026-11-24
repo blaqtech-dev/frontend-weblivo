@@ -152,15 +152,50 @@ setLoading(true);
             onChange={(e) => setBusinessType(e.target.value)}
             required
           >
-            <option value="">Select your business type</option>
-            <option value="Beauty and Salon">Beauty and Salon</option>
-            <option value="Restaurant and Food">Restaurant and Food</option>
-            <option value="Fashion and Clothing">Fashion and Clothing</option>
-            <option value="Photography">Photography</option>
-            <option value="Cleaning Services">Cleaning Services</option>
-            <option value="Education and Tutoring">Education and Tutoring</option>
-            <option value="Consulting">Consulting</option>
-            <option value="Other">Other</option>
+          <option value="">Select your business type</option>
+
+<option value="Beauty and Salon">Beauty and Salon</option>
+<option value="Restaurant and Food">Restaurant and Food</option>
+<option value="Fashion and Clothing">Fashion and Clothing</option>
+<option value="Photography">Photography</option>
+<option value="Cleaning Services">Cleaning Services</option>
+<option value="Education and Tutoring">Education and Tutoring</option>
+<option value="Consulting">Consulting</option>
+
+<option value="Real Estate and Property">Real Estate and Property</option>
+<option value="Hotels and Hospitality">Hotels and Hospitality</option>
+<option value="Travel and Tourism">Travel and Tourism</option>
+<option value="Fitness and Gym">Fitness and Gym</option>
+<option value="Healthcare and Medical">Healthcare and Medical</option>
+<option value="Technology and Software">Technology and Software</option>
+<option value="Construction and Architecture">Construction and Architecture</option>
+<option value="Interior Design">Interior Design</option>
+<option value="Automotive and Car Services">Automotive and Car Services</option>
+<option value="Events and Entertainment">Events and Entertainment</option>
+<option value="Agriculture and Farming">Agriculture and Farming</option>
+<option value="Supermarket and Retail">Supermarket and Retail</option>
+<option value="Legal Services">Legal Services</option>
+<option value="Finance and Accounting">Finance and Accounting</option>
+<option value="Beauty Products and Cosmetics">Beauty Products and Cosmetics</option>
+<option value="Bakery and Cake Shops">Bakery and Cake Shops</option>
+
+<option value="Logistics and Delivery">Logistics and Delivery</option>
+<option value="Transportation Services">Transportation Services</option>
+<option value="Marketing and Advertising">Marketing and Advertising</option>
+<option value="Digital Services">Digital Services</option>
+<option value="Graphic Design">Graphic Design</option>
+<option value="Printing and Publishing">Printing and Publishing</option>
+<option value="Home Improvement and Repairs">Home Improvement and Repairs</option>
+<option value="Plumbing and Electrical Services">Plumbing and Electrical Services</option>
+<option value="Wedding and Event Planning">Wedding and Event Planning</option>
+<option value="Catering Services">Catering Services</option>
+<option value="Jewelry and Accessories">Jewelry and Accessories</option>
+<option value="Furniture and Home Decor">Furniture and Home Decor</option>
+<option value="Pet Care and Veterinary">Pet Care and Veterinary</option>
+<option value="Personal Services">Personal Services</option>
+<option value="Nonprofit and Charity">Nonprofit and Charity</option>
+<option value="Religious Organizations">Religious Organizations</option>
+<option value="Other">Other</option>
           </select>
         </div>
 

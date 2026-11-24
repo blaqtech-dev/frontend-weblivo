@@ -42,30 +42,52 @@ export default function WebsiteEditor({
     normalizedBusinessType.includes(type)
   );
 
-  const handleTextChange = (sectionIndex, field, value, itemIndex) => {
-    setWebsiteData((previous) => {
-      const updated = structuredClone(previous);
 
-      if (sectionIndex === null) {
-        updated[field] = value;
-        return updated;
-      }
+const handleTextChange = (sectionIndex, field, value, itemIndex) => {
+  setWebsiteData((previous) => {
+    if (!previous) return previous;
 
-      if (itemIndex !== undefined) {
-        if (field === "value") {
-          updated.sections[sectionIndex].items[itemIndex] = value;
-        } else {
-          updated.sections[sectionIndex].items[itemIndex][field] = value;
-        }
-      } else {
-        updated.sections[sectionIndex][field] = value;
-      }
+    const updated = structuredClone(previous);
 
+    if (sectionIndex === null) {
+      updated[field] = value;
       return updated;
-    });
+    }
 
-    setMessage("");
-  };
+    if (!Array.isArray(updated.sections)) {
+      return previous;
+    }
+
+    const section = updated.sections[sectionIndex];
+
+    if (!section) {
+      return previous;
+    }
+
+    if (itemIndex !== undefined) {
+      if (!Array.isArray(section.items)) {
+        section.items = [];
+      }
+
+      if (field === "value") {
+        section.items[itemIndex] = value;
+      } else {
+        if (!section.items[itemIndex] || typeof section.items[itemIndex] !== "object") {
+          section.items[itemIndex] = {};
+        }
+
+        section.items[itemIndex][field] = value;
+      }
+    } else {
+      section[field] = value;
+    }
+
+    return updated;
+  });
+
+  setMessage("");
+};
+
 
   const saveChanges = async () => {
     try {
