@@ -72,14 +72,6 @@
   border-bottom: 0;
 }
 
-.preview-logo-center {
-  flex-direction: column;
-  justify-content: center;
-}
-
-.preview-logo-center nav {
-  justify-content: center;
-}
 
 /* Hero */
 
@@ -93,8 +85,6 @@
  background: var(--preview-secondary);
 color: var(--preview-secondary-contrast);
 }
-
-
 
 
 
@@ -118,9 +108,6 @@ color: var(--preview-secondary-contrast);
 }
 
 
-
-
-
 .preview-hero-placeholder {
   width: 100%;
   height: 100%;
@@ -138,11 +125,6 @@ color: var(--preview-secondary-contrast);
   grid-template-columns: 1fr;
   text-align: center;
 }
-
-
-
-
-/* General sections */
 
 
 
@@ -221,9 +203,6 @@ color: var(--preview-secondary-contrast);
 
 
 
-
-
-
 .preview-header-centered {
   flex-direction: column;
   justify-content: center;
@@ -238,16 +217,6 @@ color: var(--preview-secondary-contrast);
   min-height: 65px;
   border-bottom: 0;
 }
-
-.preview-logo-center {
-  flex-direction: column;
-  justify-content: center;
-}
-
-.preview-logo-center nav {
-  justify-content: center;
-}
-
 
 
 
@@ -301,11 +270,6 @@ color: var(--preview-secondary-contrast);
   margin-bottom: 16px;
   color: #d6a53c;
 }
-
-/* Gallery */
-
-
-/* Contact */
 
 
 
@@ -475,13 +439,6 @@ color: var(--preview-secondary-contrast);
   color: #64748b;
 }
 
-
-/* Keep contact section softly brand-tinted */
-
-
-/* Give service icons a subtle brand appearance */
-
-
 /* Match Why Choose Us with the hero colour theme */
 
 
@@ -492,14 +449,6 @@ color: var(--preview-secondary-contrast);
 .preview-features > p {
   color: var(--preview-secondary-contrast);
 }
-
-/* Responsive */
-
-
-
-
-
-/* Design variations */
 
 
 
@@ -551,8 +500,6 @@ color: var(--preview-secondary-contrast);
 }
 
 
-
-
 /* =========================================
    HEADER
 ========================================= */
@@ -575,21 +522,10 @@ color: var(--preview-secondary-contrast);
   border-bottom: 0;
 }
 
-.preview-logo-center {
-  flex-direction: column;
-  justify-content: center;
-}
-
-.preview-logo-center nav {
-  justify-content: center;
-}
 
 /* =========================================
    HERO
 ========================================= */
-
-
-
 
 
 
@@ -631,19 +567,6 @@ color: var(--preview-secondary-contrast);
   grid-template-columns: 1fr;
   text-align: center;
 }
-
-
-
-
-/* =========================================
-   GENERAL SECTIONS
-========================================= */
-
-
-
-/* =========================================
-   SERVICES
-========================================= */
 
 
 
@@ -711,22 +634,19 @@ color: var(--preview-secondary-contrast);
   border-bottom: 0;
 }
 
+/* =========================================
+   LOGO CENTER ALIGNMENT
+========================================= */
+
 .preview-logo-center {
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .preview-logo-center nav {
   justify-content: center;
 }
-
-/* =========================================
-   HERO
-========================================= */
-
-
-
-
 
 
 
@@ -773,11 +693,6 @@ color: var(--preview-secondary-contrast);
 
 
 /* =========================================
-   GENERAL SECTIONS
-========================================= */
-
-
-/* =========================================
    SERVICES
 ========================================= */
 
@@ -817,12 +732,6 @@ color: var(--preview-secondary-contrast);
 
 
 
-
-/* =========================================
-   TESTIMONIALS
-========================================= */
-
-
 /* =========================================
    CONTACT
 ========================================= */
@@ -839,12 +748,6 @@ color: var(--preview-secondary-contrast);
 .preview-contact > p {
   color: var(--preview-secondary-contrast);
 }
-
-
-
-
-
-
 
 
 
@@ -1000,9 +903,6 @@ color: var(--preview-secondary-contrast);
   background: #fee2e2;
 }
 
-.preview-layout-centered {
-  text-align: center;
-}
 
 /* =========================================
    HERO HEADING
@@ -1272,81 +1172,6 @@ color: var(--preview-secondary-contrast);
   box-shadow: none;
 }
 
-/* =========================================
-   ABOUT SECTION
-========================================= */
-
-
-/* ABOUT SECTION LAYOUTS */
-.preview-about {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  gap: 55px;
-}
-
-.preview-about-content {
-  min-width: 0;
-}
-
-.preview-about > .preview-about-content > p {
-  max-width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-  white-space: pre-line;
-  line-height: 1.9;
-}
-
-/* Centered layout */
-.preview-layout-centered {
-  text-align: center;
-}
-
-.preview-layout-centered .preview-about-content {
-  max-width: 850px;
-  margin: auto;
-}
-
-/* Split layout */
-
-/* Split layout */
-.preview-layout-split {
-  grid-template-columns: 0.8fr 1.2fr;
-  text-align: left;
-  column-gap: 65px;
-}
-
-.preview-layout-split .preview-about-heading {
-  align-self: center;
-}
-
-.preview-layout-split .preview-about-description {
-  align-self: center;
-}
-
-.preview-layout-split .preview-about-description > p {
-  max-width: 100%;
-  margin: 0;
-}
-
-/* Default and minimal layouts */
-.preview-about-heading,
-.preview-about-description {
-  min-width: 0;
-}
-
-.preview-layout-minimal .preview-about-description > p {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* Centered layout */
-.preview-layout-centered .preview-about-heading,
-.preview-layout-centered .preview-about-description {
-  text-align: center;
-}
 
 
 /* Image layouts */
@@ -1356,28 +1181,8 @@ color: var(--preview-secondary-contrast);
   text-align: left;
 }
 
-.preview-layout-image-left .preview-about-media {
-  order: -1;
-}
 
-.preview-about-media {
-  width: 100%;
-  min-width: 0;
-  height: 100%;
-  min-height: 320px;
-  max-height: 460px;
-  overflow: hidden;
-  border-radius: 20px;
-  background: var(--preview-secondary);
-}
 
-.preview-about-media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  object-fit: cover;
-}
 
 /* Minimal layout */
 .preview-layout-minimal {
@@ -1386,11 +1191,6 @@ color: var(--preview-secondary-contrast);
   padding-top: 65px;
   padding-bottom: 65px;
 }
-
-.preview-layout-minimal .preview-about-content > p {
-  margin-left: 0;
-}
-
 
 
 
@@ -1465,26 +1265,6 @@ color: var(--preview-secondary-contrast);
    NAVBAR BRAND / LOGO
 ========================================= */
 
-.preview-brand {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  min-width: 0;
-  color: var(--preview-primary-on-white);
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.8px;
-}
-
-.preview-brand img {
-  display: block;
-  width: auto;
-  max-width: 170px;
-  height: 52px;
-  object-fit: contain;
-  object-position: left center;
-}
 
 /* =========================================
    NAVBAR NAVIGATION
@@ -1701,6 +1481,125 @@ color: var(--preview-secondary-contrast);
 }
 
 
+/* =========================================
+   WEBLIVO ABOUT SECTION
+========================================= */
+
+.preview-about {
+  max-width: 1200px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 65px;
+
+  text-align: left;
+}
+
+/* About text wrapper */
+
+.preview-about-content {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Heading */
+
+.preview-about-heading {
+  min-width: 0;
+  margin-bottom: 22px;
+}
+
+.preview-about-heading h2 {
+  margin-top: 12px;
+  line-height: 1.2;
+}
+
+/* Description */
+
+.preview-about-description {
+  min-width: 0;
+}
+
+.preview-about-description > p {
+  max-width: 620px;
+  margin: 0;
+
+  white-space: pre-line;
+  line-height: 1.9;
+  font-size: 16px;
+}
+
+/* About image */
+
+.preview-about-media {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 320px;
+  max-height: 460px;
+
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--preview-secondary);
+}
+
+.preview-about-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+
+  object-fit: cover;
+}
+
+/* No image: centered text */
+
+.preview-layout-centered {
+  grid-template-columns: minmax(0, 850px);
+  justify-content: center;
+  text-align: center;
+}
+
+.preview-layout-centered .preview-about-content {
+  max-width: 850px;
+  margin: auto;
+}
+
+.preview-layout-centered .preview-about-heading,
+.preview-layout-centered .preview-about-description {
+  text-align: center;
+}
+
+.preview-layout-centered .preview-about-description > p {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================
+   WEBSITE LOGO
+========================================= */
+
+.preview-brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  max-width: 260px;
+}
+
+.preview-brand img {
+  display: block;
+  width: auto;
+  height: 65px;
+  max-width: 850px;
+  object-fit: contain;
+  border-radius:10px;
+}
+
+
 
 /* =========================================
    RESPONSIVE DESIGN
@@ -1760,9 +1659,6 @@ color: var(--preview-secondary-contrast);
   }
 
  
-
-  
-
   .preview-menu-toggle {
     display: inline-flex;
   }
@@ -1811,6 +1707,15 @@ color: var(--preview-secondary-contrast);
     flex-direction: row;
     justify-content: space-between;
     gap: 12px;
+  }
+
+   .preview-logo-center {
+    gap: 12px;
+  }
+
+  .preview-logo-center nav {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   /* Hero */
@@ -1960,23 +1865,12 @@ color: var(--preview-secondary-contrast);
     gap: 30px;
   }
 
-  .preview-layout-image-left .preview-about-media {
-    order: 0;
-  }
 
-  .preview-about-media {
-    min-height: 240px;
-    max-height: 320px;
-  }
 
-  .preview-about-media img {
-    min-height: 240px;
-  }
 
-  .preview-layout-split {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
+ 
+
+
    .preview-hero-image-background {
     min-height: 560px;
     padding: 90px 7%;
@@ -2013,6 +1907,37 @@ color: var(--preview-secondary-contrast);
   .preview-hero-image-background .preview-hero-content > p {
     margin-left: auto;
     margin-right: auto;
+  }
+
+   .preview-about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    text-align: center;
+  }
+
+  .preview-about-heading,
+  .preview-about-description {
+    text-align: center;
+  }
+
+  .preview-about-description > p {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  .preview-about-media {
+    min-height: 280px;
+    max-height: 380px;
+  }
+
+  .preview-about-media img {
+    min-height: 280px;
+  }
+   .preview-brand img {
+    height: 55px;
+    max-width: 650px;
   }
 }
 
@@ -2061,11 +1986,7 @@ color: var(--preview-secondary-contrast);
   }
 
  
-  .preview-brand img {
-    max-width: 105px;
-    height: 35px;
-  }
-
+ 
   .preview-hero {
     padding: 48px 5%;
   }
@@ -2154,7 +2075,27 @@ color: var(--preview-secondary-contrast);
   }
 
 
+  .preview-about {
+    gap: 24px;
+  }
 
+  .preview-about-description > p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .preview-about-media {
+    min-height: 240px;
+    max-height: 320px;
+  }
+
+  .preview-about-media img {
+    min-height: 240px;
+  }
+  .preview-brand img {
+    height: 48px;
+    max-width: 600px;
+  }
  
 }
 

@@ -270,6 +270,10 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
     (image) => image.placement === "hero"
   );
 
+  const aboutImageUpload = uploadedImages.find(
+  (image) => image.placement === "about"
+);
+
   const logoImage = uploadedImages.find(
     (image) => image.placement === "logo"
   );
@@ -369,81 +373,87 @@ const secondaryBackgroundText = getReadableTextColor(secondaryColor);
 
    
    
-      case "about": {
-        const requestedLayout = section.layout || "default";
 
-        const supportedLayouts = [
-          "centered",
-          "split",
-          "minimal",
-          "image-left",
-          "image-right",
-        ];
+case "about": {
+  const requestedLayout = section.layout || "default";
 
-        const aboutLayout = supportedLayouts.includes(requestedLayout)
-          ? requestedLayout
-          : "default";
+  const supportedLayouts = [
+    "centered",
+    "split",
+    "minimal",
+    "image-left",
+    "image-right",
+  ];
 
-        const aboutImage = section.image?.url;
+  const aboutLayout = supportedLayouts.includes(requestedLayout)
+    ? requestedLayout
+    : "default";
 
-        const effectiveLayout =
-          (aboutLayout === "image-left" ||
-            aboutLayout === "image-right") &&
-          !aboutImage
-            ? "split"
-            : aboutLayout;
+  // Use the uploaded About image first.
+  // Fall back to the website's hero image.
+  const generatedHeroImage = heroSection?.image?.url;
 
-        return (
-          <section
-            className={`preview-section preview-about preview-layout-${effectiveLayout}`}
-            id="about"
-            key={index}
-          >
-            <div className="preview-about-heading">
-              <div className="preview-section-label">OUR STORY</div>
+const aboutImage =
+  aboutImageUpload?.url ||
+  section.image?.url ||
+  heroImage?.url ||
+  generatedHeroImage;
 
-              <h2>
-                <EditableText
-                  editable={isEditable}
-                  value={section.heading}
-                  onSave={(value) =>
-                    onTextChange?.(index, "heading", value)
-                  }
-                />
-              </h2>
-            </div>
+  const effectiveLayout = aboutImage
+    ? "image-right"
+    : "centered";
 
-            <div className="preview-about-description">
-              <p>
-                <EditableText
-                  editable={isEditable}
-                  multiline
-                  value={section.content || section.subheading || ""}
-                  onSave={(value) =>
-                    onTextChange?.(
-                      index,
-                      section.content ? "content" : "subheading",
-                      value
-                    )
-                  }
-                />
-              </p>
-            </div>
+  return (
+    <section
+      className={`preview-section preview-about preview-layout-${effectiveLayout}`}
+      id="about"
+      key={index}
+    >
+      <div className="preview-about-content">
+        <div className="preview-about-heading">
+          <div className="preview-section-label">OUR STORY</div>
 
-            {(effectiveLayout === "image-left" ||
-              effectiveLayout === "image-right") &&
-              aboutImage && (
-                <div className="preview-about-media">
-                  <img
-                    src={aboutImage}
-                    alt={`${siteName} story`}
-                    loading="lazy"
-                  />
-                </div>
-              )}
-          </section>
-        );
-      }
+          <h2>
+            <EditableText
+              editable={isEditable}
+              value={section.heading}
+              onSave={(value) =>
+                onTextChange?.(index, "heading", value)
+              }
+            />
+          </h2>
+        </div>
+
+        <div className="preview-about-description">
+          <p>
+            <EditableText
+              editable={isEditable}
+              multiline
+              value={section.content || section.subheading || ""}
+              onSave={(value) =>
+                onTextChange?.(
+                  index,
+                  section.content ? "content" : "subheading",
+                  value
+                )
+              }
+            />
+          </p>
+        </div>
+      </div>
+
+      {aboutImage && (
+        <div className="preview-about-media">
+          <img
+            src={aboutImage}
+            alt={`${siteName} story`}
+            loading="lazy"
+          />
+        </div>
+      )}
+    </section>
+  );
+}
 
 
       case "services":

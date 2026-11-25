@@ -17,12 +17,19 @@ import "./imageuploader.css";
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
+
 const destinations = [
   {
     value: "hero",
     label: "Hero image",
     description: "Main homepage image",
     icon: PanelsTopLeft,
+  },
+  {
+    value: "about",
+    label: "About image",
+    description: "Our story and business introduction",
+    icon: ImageIcon,
   },
   {
     value: "logo",
@@ -37,6 +44,7 @@ const destinations = [
     icon: GalleryVertical,
   },
 ];
+
 
 export default function ImageUploader({ projectId }) {
   const router = useRouter();
