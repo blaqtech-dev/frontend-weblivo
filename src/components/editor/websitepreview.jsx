@@ -442,15 +442,32 @@ const aboutImage =
         </div>
       </div>
 
-      {aboutImage && (
-        <div className="preview-about-media">
-          <img
-            src={aboutImage}
-            alt={`${siteName} story`}
-            loading="lazy"
-          />
-        </div>
-      )}
+     {aboutImage && (
+  <div className="preview-about-visual">
+    <div className="preview-about-media">
+      <img
+        src={aboutImage}
+        alt={`${siteName} story`}
+        loading="lazy"
+      />
+    </div>
+
+    {(section.imageCaption || isEditable) && (
+      <p className="preview-about-image-caption">
+        <EditableText
+          value={
+            section.imageCaption ||
+            (isEditable ? "Add image caption" : "")
+          }
+          editable={isEditable}
+          onSave={(value) =>
+            onTextChange?.(index, "imageCaption", value)
+          }
+        />
+      </p>
+    )}
+  </div>
+)}
     </section>
   );
 }
@@ -678,13 +695,13 @@ case "gallery": {
 
             {(item.price || isEditable) && (
               <p className="preview-gallery-price">
-                <EditableText
-                  value={item.price || ""}
-                  editable={isEditable}
-                  onSave={(value) =>
-                    onTextChange?.(index, "price", value, itemIndex)
-                  }
-                />
+              <EditableText
+  value={item.price || (isEditable ? "Add price" : "")}
+  editable={isEditable}
+  onSave={(value) =>
+    onTextChange?.(index, "price", value, itemIndex)
+  }
+/>
               </p>
             )}
 
